@@ -1,0 +1,72 @@
+Class Node:
+FIELDS:
+ints x and y for position in the maze
+Color color 
+ArrayList<Edge> edges to represent edges coming from the node
+METHODS:
+convenience and special constructors
+makeEdge - makes an edge with another node from this node
+randomizeEdgeWeights - resets the edge weights of all the edges in AL edges, according to horizontal or vertical preference
+changeColor - changes the color of the node
+addEdge - given an edge, adds it to AL edges, and same to the other node of the edge
+isAdjacent - returns whether or not the given node is adjacent to this in the given direction
+addEdges - adds an AL of edges to this' edges
+addConnections - adds all nodes connected to this one, in the front or back according to if it's in depth or breadth first mode
+draw - draws the node with borders
+isValidMove - returns if given node is a valid (not blocked by a wall) adjacent node
+validAdjacent - calculates which of adjacent nodes are valid based off AL edges
+
+Class Edge:
+FIELDS:
+Nodes to and from to represent the two vertices of the edge
+int weight to represent the weight of the edge
+METHODS:
+constructor
+otherEnd - gets the other one of the nodes than the one given
+equalRepresentatives - returns whether or not to and from have same representatives in the UnionFind
+unionNodes - unions (sets representatives the same) of to and from
+addWalls - adds walls to a world image of a node based off direction of the other end
+compareWeight - returns the difference between this and another edge's weight
+randomizeWeight - based on vert or horizontal preference, (re)randomizes the weight
+
+Class Maze:
+FIELDS:
+ArrayList<ArrayList<Node> nodes to represent the maze nodes
+ArrayList<Edge> connections to represent the cheapest spanning path
+ints width and height
+boolean depthfirstsearch to toggle the search mode (between breadth first)
+Nodes start and end to signify where the maze starts and ends
+ArrayList<Node> path to keep track of the current solve progress
+ArrayList<Node> nodesSeen to keep track of nodes in order to avoid backtracking
+bools toggleAnimate and playerToggleAnimate to toggle the solving in the world function
+bool player to toggle whether it's in manual player mode or not
+ints playerY and playerX to keep track of the player's position
+ArrayList<Node> playerNodesSeen, same as nodesSeen but for the player mode
+String overlay to show the mode, and if you won in player mode
+ints findtick drawtick and playerfindtick to keep track of the steps. Act more as booleans than ints
+booleans vertPref and horizPref to toggle between modes
+METHODS:
+constructor - sets all nodes and edges
+cheapestSpanningPath - based off random edge values, finds cheapest spanning path of the maze
+pathFromTo - finds path from start until end, used to find path from top left to bot right
+draw - draws the entire maze
+makeScene - creates the whole scene, overlaying the information text as well
+onTick - with bigBang updates the solving progress every tick
+restart - resets all the color on the maze
+onKeyEvent - handles key presses, all explained in user guide
+bigBang - specialized to avoid field access
+
+Class WeightSort: 
+Comparator class in order to sort the list of edges in order of weight
+has one function, compare, that does just that. Functional object
+
+Class NodeUnionFind:
+The union find data structure, specialized for nodes and edges.
+has a hashmap that stores Node, Node, which means the nodes are their own representatives, keys
+METHODS: 
+two constructors, one for ease of testing, other is default
+setRepresentatives - sets all nodes representatives to themselves, given An Al<Al<Node>>
+union - sets the first given nodes representative to the second
+find - loops through the representatives until it finds the furthest one (highest level)
+size - returns the amount of distinct representatives in the hashmap
+

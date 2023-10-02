@@ -1,0 +1,8 @@
+Keys:
+d : set the search algorithm to depth-first
+b : set the search algorithm to breadth-first
+r : restart the maze, creating an entirely new one and beginning to solve it
+p : stop solving the maze, and instead allow the user to enter the maze, using the arrow keys to move. When the player reaches the exit (in red) the maze automatically completes, and it tells you the player they won
+v : sets the preference to vertical, there will now be significantly more vertical borders that horizontal
+h : sets the preference to horizontal, there will now be significantly more horizontal borders than vertical
+s : sets the preference to standard, and restarts the maze, creating a new one and solving it
